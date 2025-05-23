@@ -47,10 +47,10 @@ typedef struct {
 #define HEARTBEAT_LED_PIN           5     // PA5 para LD2
 #define HEARTBEAT_LED_PORT       GPIOA // Ya conocido por el driver GPIO
 
-#define EXTERNAL_LED_PWM_PIN        6     // PA6 (TIM3_CH1)
-#define EXTERNAL_LED_PWM_PORT    GPIOA
+#define EXTERNAL_LED_PWM_PIN        4     // PB4 (TIM3_CH1)
+#define EXTERNAL_LED_PWM_PORT    GPIOB
 
-#define EXTERNAL_LED_ONOFF_PIN      7     // PA7 para emulacion de estado de puerta
+#define EXTERNAL_LED_ONOFF_PIN      12    // PA12 para emulacion de estado de puerta
 #define EXTERNAL_LED_ONOFF_PORT  GPIOA
 
 #define USER_BUTTON_PIN             13    // PC13 para B1
@@ -61,5 +61,8 @@ void gpio_setup_pin(GPIO_TypeDef *gpio_port, uint8_t pin_number, uint8_t mode, u
 void gpio_write_pin(GPIO_TypeDef *gpio_port, uint8_t pin_number, uint8_t pin_state);
 uint8_t gpio_read_pin(GPIO_TypeDef *gpio_port, uint8_t pin_number);
 void gpio_toggle_pin(GPIO_TypeDef *gpio_port, uint8_t pin_number);
+void gpio_init(void);
+void gpio_write_ld2(uint8_t state);
+void gpio_write_led_ext(uint8_t state);
 
 #endif // GPIO_H
