@@ -36,5 +36,6 @@ Esta guía está dividida en varias secciones para facilitar el proceso de desar
 7.  **[Módulo NVIC (Doc/NVIC.md)](Doc/NVIC.md):** Configuración de interrupciones.
 8.  **[Lógica de Control (Doc/ROOM_CONTROL.md)](Doc/ROOM_CONTROL.md):** Integración de la lógica de la aplicación.
 9. **[Función Principal (Doc/MAIN.md)](Doc/MAIN.md):** Estructura del archivo `main.c`.
+10. **[Manual de Usuario (Doc/USER_MANUAL.md)](Doc/USER_MANUAL.md):** Funciones y arquitectura del sistema.
 
 ¡Manos a la obra! Comienza por revisar la [Configuración del Entorno (Doc/SETUP.md)](Doc/SETUP.md).
