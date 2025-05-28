@@ -23,6 +23,12 @@ void room_control_on_button_press(void);
 void room_control_on_uart_receive(char received_char);
 
 /**
+ * @brief Función a ser llamada periódicamente por SysTick_Handler para ejecutar
+ *        la lógica de control de la sala (ej. apagar luz de puerta después de un tiempo).
+ */
+void room_control_tick(void);
+
+/**
  * @brief (Opcional) Función para realizar inicializaciones específicas de la lógica
  *        de room_control, si las hubiera (ej. inicializar variables de estado).
  *        Las inicializaciones de periféricos se harán en main().

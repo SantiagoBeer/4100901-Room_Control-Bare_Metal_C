@@ -8,6 +8,7 @@
 #include "uart.h"
 #include "rcc.h"  // Para rcc_usart2_clock_enable y PCLK1_FREQ_HZ
 #include "gpio.h" // Para configurar pines PA2, PA3
+#include "room_control.h"
 
 
 // USART_ISR bits
@@ -73,5 +74,6 @@ void USART2_IRQHandler(void)
         char received_char = (char)(USART2->RDR & 0xFF);
         uart2_send_char(received_char); // Eco del carácter recibido 
         // Procesar el carácter recibido.
+        room_control_on_uart_receive(received_char);
     }
 }
