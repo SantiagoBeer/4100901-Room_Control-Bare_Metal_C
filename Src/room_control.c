@@ -24,6 +24,12 @@ void room_control_app_init(void)
     g_door_open_tick = 0;
 
     tim3_ch1_pwm_set_duty_cycle(20); // Lámpara al 20%
+
+    uart2_send_string("Controlador de Sala v1.0\r\n");
+    uart2_send_string("Desarrollador: [German Santiago Bernal Hoyos]\r\n");
+    uart2_send_string("Estado inicial:\r\n");
+    uart2_send_string(" - Lámpara: 20%\r\n");
+    uart2_send_string(" - Puerta: Cerrada\r\n");
 }
 
 void room_control_on_button_press(void)
@@ -82,6 +88,21 @@ void room_control_on_uart_receive(char cmd)
             uart2_send_string("Puerta cerrada remotamente.\r\n");
             break;
 
+        case '?': 
+            uart2_send_string("Comandos disponibles:\r\n");
+            uart2_send_string("1: Lámpara al 100%\r\n");
+            uart2_send_string("2: Lámpara al 70%\r\n");
+            uart2_send_string("3: Lámpara al 50%\r\n");
+            uart2_send_string("4: Lámpara al 20%\r\n");
+            uart2_send_string("0: Lámpara apagada\r\n");
+            uart2_send_string("o: Abrir puerta \r\n");
+            uart2_send_string("c: Cerrar puerta \r\n");
+            uart2_send_string("s: Estado del sistema\r\n");
+            uart2_send_string("?: Ayuda \r\n");
+        
+        case 'g':
+        case 'G': 
+
         default:
             uart2_send_string("Comando desconocido.\r\n");
             break;
@@ -96,3 +117,4 @@ void room_control_tick(void)
         g_door_open = 0;
     }
 }
+
