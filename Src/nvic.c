@@ -8,6 +8,7 @@
 #include "nvic.h"
 #include "rcc.h"  // Para habilitar relojes de GPIOC y SYSCFG
 #include "uart.h"
+#include "room_control.h" // Asegúrate de incluir esto si no está
 
 
 #define NVIC_ENABLE_IRQ(IRQn) (NVIC->ISER[IRQn / 32U] |= (1UL << (IRQn % 32U)))
@@ -39,4 +40,13 @@ void nvic_usart2_irq_enable(void)
     // Esto hará que se genere una interrupción cuando RDR tenga un dato.
     USART2->CR1 |= 0x01 << 5;
     NVIC_ENABLE_IRQ(USART2_IRQn);
+}
+
+void EXTI15_10_IRQHandler(void)
+{
+    // Verifica si la interrupción fue por PC13
+    if (EXTI->PR1 & (1U << 13)) {
+        EXTI->PR1 = (1U << 13); // Limpia el pending bit escribiendo 1
+        room_control_on_button_press(); // Llama a tu función de aplicación
+    }
 }

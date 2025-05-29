@@ -8,6 +8,7 @@
 #ifndef ROOM_CONTROL_H
 #define ROOM_CONTROL_H
 
+
 #include <stdint.h>
 
 /**
@@ -34,5 +35,9 @@ void room_control_tick(void);
  *        Las inicializaciones de periféricos se harán en main().
  */
 void room_control_app_init(void);
+
+void room_control_main_tasks(void);
+
+void room_control_led_ext_task(void);
 
 #endif // ROOM_CONTROL_H

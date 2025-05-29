@@ -48,6 +48,16 @@ void gpio_write_pin(GPIO_TypeDef *gpio_port, uint8_t pin_number, uint8_t pin_sta
     }
 }
 
+void gpio_write_ld2(uint8_t state)
+{
+    gpio_write_pin(GPIOA, 5, state); // PA5 es LD2
+}
+
+void gpio_write_led_ext(uint8_t state)
+{
+    gpio_write_pin(EXTERNAL_LED_ONOFF_PORT, EXTERNAL_LED_ONOFF_PIN, state ? GPIO_PIN_SET : GPIO_PIN_RESET);
+}
+
 void gpio_toggle_pin(GPIO_TypeDef *gpio_port, uint8_t pin_number)
 {
     // Alternar el estado del pin usando ODR (Output Data Register)
@@ -64,12 +74,28 @@ uint8_t gpio_read_pin(GPIO_TypeDef *gpio_port, uint8_t pin_number)
     }
 }
 
+void gpio_init(void)
+{
+    // Inicializa PA5 (LD2) como salida
+    gpio_setup_pin(GPIOA, 5, GPIO_MODE_OUTPUT, 0);
+
+    // Inicializa PB4 (PWM LED externo) como función alternativa (TIM3_CH1, AF2)
+    gpio_setup_pin(GPIOB, 4, GPIO_MODE_AF, 2);
+
+    // Inicializa PA7 (LED externo ON/OFF) como salida
+    gpio_setup_pin(GPIOA, 7, GPIO_MODE_OUTPUT, 0);
+
+    // Inicializa PC13 (Botón B1) como entrada
+    gpio_setup_pin(GPIOC, 13, GPIO_MODE_INPUT, 0);
+}
+
 /**
  * @brief Rutina de Servicio de Interrupción para EXTI líneas 10 a 15.
  *        Este nombre debe coincidir exactamente con el definido en la tabla de vectores
  *        del archivo de arranque (startup_stm32l476rgtx.s).
  *        Esta ISR puede ser llamada por room_control.c si la lógica es compleja.
  */
+<<<<<<< HEAD
 void EXTI15_10_IRQHandler(void) {
     // 1. Verificar si la interrupción fue de la línea EXTI13
     if ((EXTI->PR1 & (1U << 13)) != 0) {
@@ -79,4 +105,7 @@ void EXTI15_10_IRQHandler(void) {
         room_control_on_button_press();
     }
 }
+=======
+
+>>>>>>> 50c5022abba163564e6894b583464d05d1616075
 
